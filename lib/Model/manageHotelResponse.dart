@@ -14,6 +14,7 @@ class ManageHotelResponse {
   String? location_id;
   String? recovery;
   String? status;
+  String? district;
 
   ManageHotelResponse(this.title,this.rep_name,
       this.rep_email,
@@ -27,5 +28,6 @@ class ManageHotelResponse {
       this.address,
       this.location_id,
       this.recovery,
-      this.status);
+      this.status,
+      this.district);
 }

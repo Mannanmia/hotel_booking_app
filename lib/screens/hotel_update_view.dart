@@ -23,7 +23,7 @@ class _HotelUpdateViewState extends State<HotelUpdateView> {
   _HotelUpdateViewState(this._hotel_id);
   //Variable part......
   ManageHotelResponse response = ManageHotelResponse("", null, null, null,
-      null, null, null, null, null, null,"", null, null, null);
+      null, null, null, null, null, null,"", null, null, null,null);
   TextEditingController _htl_name_controller = TextEditingController();
   TextEditingController _represen_name_controller = TextEditingController();
   TextEditingController _represen_email_controller = TextEditingController();
@@ -65,6 +65,9 @@ class _HotelUpdateViewState extends State<HotelUpdateView> {
         ? TextEditingController()
         : _address_controller.text = response.address!;
     //_district_controller.text = response.
+    (response.district == null)
+        ? _dropdownvalue = 'Select District'
+        : _dropdownvalue = response.district!;
   }
 
 

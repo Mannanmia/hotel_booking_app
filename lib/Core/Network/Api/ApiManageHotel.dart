@@ -17,7 +17,7 @@ class ApiManageHotel{
       var url = Uri.parse(urlData);
       var response = await http.get(url);
       var jsonData = jsonDecode(response.body);
-      ManageHotelResponse data = ManageHotelResponse(jsonData["title"],jsonData["rep_name"],jsonData["rep_email"],jsonData["rep_url"],jsonData["rep_mobile"],jsonData["rep_idc"],jsonData["rep_license"],jsonData["map_lat"],jsonData["map_lng"],jsonData["map_zoom"],jsonData["address"],jsonData["location_id"],jsonData["recovery"],jsonData["status"]);
+      ManageHotelResponse data = ManageHotelResponse(jsonData["title"],jsonData["rep_name"],jsonData["rep_email"],jsonData["rep_url"],jsonData["rep_mobile"],jsonData["rep_idc"],jsonData["rep_license"],jsonData["map_lat"],jsonData["map_lng"],jsonData["map_zoom"],jsonData["address"],jsonData["location_id"],jsonData["recovery"],jsonData["status"],jsonData["district"]);
       return data;
     }catch (e) {
       if (e is SocketException) {
@@ -67,7 +67,7 @@ class ApiManageHotel{
       var url = Uri.parse(urlData);
       var response = await http.get(url);
       var jsonData = jsonDecode(response.body);
-      ManageHotelResponse data = ManageHotelResponse(jsonData["title"],jsonData["rep_name"],jsonData["rep_email"],jsonData["rep_url"],jsonData["rep_mobile"],jsonData["rep_idc"],jsonData["rep_license"],jsonData["map_lat"],jsonData["map_lng"],jsonData["map_zoom"],jsonData["address"],jsonData["location_id"],jsonData["recovery"],jsonData["status"]);
+      ManageHotelResponse data = ManageHotelResponse(jsonData["title"],jsonData["rep_name"],jsonData["rep_email"],jsonData["rep_url"],jsonData["rep_mobile"],jsonData["rep_idc"],jsonData["rep_license"],jsonData["map_lat"],jsonData["map_lng"],jsonData["map_zoom"],jsonData["address"],jsonData["location_id"],jsonData["recovery"],jsonData["status"],jsonData["district"]);
       return data;
     }catch (e) {
       if (e is SocketException) {

@@ -60,7 +60,10 @@ class _BuyCraditViewState extends State<BuyCraditView> {
                 ),
               ),
               SizedBox(height: size.height*.01,),
-              MaterialButton(onPressed: (){},child: Text("Process Now",style: TextStyle(color: Colors.white),),color: AppColor.yaleBlue,)
+              MaterialButton(onPressed: (){
+
+              },
+                child: Text("Process Now",style: TextStyle(color: Colors.white),),color: AppColor.yaleBlue,)
             ],
           ),
         ),

@@ -42,7 +42,7 @@ class ManageHotelView extends StatefulWidget {
 class _ManageHotelViewState extends State<ManageHotelView> {
   //Variable part......
   ManageHotelResponse response = ManageHotelResponse("", null, null, null,
-      null, null, null, null, null, null,"", null, null, null);
+      null, null, null, null, null, null,"", null, null, null,null);
   TextEditingController _htl_name_controller = TextEditingController();
   TextEditingController _represen_name_controller = TextEditingController();
   TextEditingController _represen_email_controller = TextEditingController();
