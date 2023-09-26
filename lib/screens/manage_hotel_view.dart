@@ -116,7 +116,7 @@ class _ManageHotelViewState extends State<ManageHotelView> {
                     ),
                   ],
                 ),
-                /*Text("--Select Service--",style: TextStyle(color: AppColor.skyBlue),),*/
+                // Text("--Select Service--",style: TextStyle(color: AppColor.skyBlue),),
               ],
             ),
           ),

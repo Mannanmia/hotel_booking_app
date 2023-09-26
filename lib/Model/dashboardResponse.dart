@@ -26,7 +26,7 @@ class DashboardResponse {
      this.earning,
      this.booking,
      this.service,
-    this.date,
+     this.date ,
     this.totalRoom,
     this.totalRoomTitel,
     this.availableRoom,

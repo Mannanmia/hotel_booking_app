@@ -126,113 +126,115 @@ class _Available_BookedViewState extends State<Available_BookedView> {
         builder:(context,setState)=> AlertDialog(
           content: SizedBox(
             height: size.height*0.45,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-               const Text("Date Information"),
-               const Divider(),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text("Start Date :"),
-                    SizedBox(
-                      width: size.width*0.45,
-                      child: TextField(
-                        onTap: () async{
-                          DateTime? datePicker = await showDatePicker(context: context,
-                              initialDate: DateTime.now(),
-                              firstDate: DateTime(DateTime.now().year),
-                              lastDate: DateTime(2030));
-                          setState(()=> this._startdate.text = datePicker!.year.toString()+"/"+datePicker.month.toString()+"/"+datePicker.day.toString());
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                 const Text("Date Information"),
+                 const Divider(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text("Start Date :"),
+                      SizedBox(
+                        width: size.width*0.45,
+                        child: TextField(
+                          onTap: () async{
+                            DateTime? datePicker = await showDatePicker(context: context,
+                                initialDate: DateTime.now(),
+                                firstDate: DateTime(DateTime.now().year),
+                                lastDate: DateTime(2030));
+                            setState(()=> this._startdate.text = datePicker!.year.toString()+"/"+datePicker.month.toString()+"/"+datePicker.day.toString());
+                            },
+                          controller: _startdate,
+                          decoration: InputDecoration(
+                            hintText: "2029/06/25",
+                            labelText: "Start Date",
+                            border: OutlineInputBorder(),),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: size.height*0.005,),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text("End Date :"),
+                      SizedBox(
+                        width: size.width*0.45,
+                        child: TextField(
+                          onTap: () async{
+                            DateTime? datePicker = await showDatePicker(context: context,
+                                initialDate: DateTime.now(),
+                                firstDate: DateTime(DateTime.now().year),
+                                lastDate: DateTime(2030));
+                            setState(()=> this._enddate.text = datePicker!.year.toString()+"/"+datePicker.month.toString()+"/"+datePicker.day.toString());
                           },
-                        controller: _startdate,
-                        decoration: InputDecoration(
-                          hintText: "2029/06/25",
-                          labelText: "Start Date",
-                          border: OutlineInputBorder(),),
+                          controller: _enddate,
+                          decoration: InputDecoration(
+                            hintText: "2029/06/25",
+                            labelText: "End Date",
+                            border: OutlineInputBorder(),),
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 5,),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text("End Date :"),
-                    SizedBox(
-                      width: size.width*0.45,
-                      child: TextField(
-                        onTap: () async{
-                          DateTime? datePicker = await showDatePicker(context: context,
-                              initialDate: DateTime.now(),
-                              firstDate: DateTime(DateTime.now().year),
-                              lastDate: DateTime(2030));
-                          setState(()=> this._enddate.text = datePicker!.year.toString()+"/"+datePicker.month.toString()+"/"+datePicker.day.toString());
-                        },
-                        controller: _enddate,
-                        decoration: InputDecoration(
-                          hintText: "2029/06/25",
-                          labelText: "End Date",
-                          border: OutlineInputBorder(),),
+                    ],
+                  ),
+                  SizedBox(height: size.height*0.005,),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text("Max Guest :"),
+                      SizedBox(
+                        width: size.width*0.445,
+                        child: TextField(
+                          controller: _maxGuest,
+                          decoration: InputDecoration(
+                            hintText: "7",
+                            labelText: "Guest",
+                            border: OutlineInputBorder(),),
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 5,),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text("Max Guest :"),
-                    SizedBox(
-                      width: size.width*0.45,
-                      child: TextField(
-                        controller: _maxGuest,
-                        decoration: InputDecoration(
-                          hintText: "7",
-                          labelText: "Guest",
-                          border: OutlineInputBorder(),),
+                    ],
+                  ),
+                  SizedBox(height: size.height*0.005,),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text("Price :"),
+                      SizedBox(
+                        width: size.width*0.45,
+                        child: TextField(
+                          controller: _price,
+                          decoration: InputDecoration(
+                            hintText: "1125",
+                            labelText: "Price",
+                            border: OutlineInputBorder(),),
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 5,),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text("Price :"),
-                    SizedBox(
-                      width: size.width*0.45,
-                      child: TextField(
-                        controller: _price,
-                        decoration: InputDecoration(
-                          hintText: "1125",
-                          labelText: "Price",
-                          border: OutlineInputBorder(),),
-                      ),
-                    ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    Text("Status : "),
-                    Checkbox(value: _isChecked, onChanged: (value){
-                      setState(()=> this._isChecked = value!);
-                    }),
-                    InkWell(child: Text("Aviable For Booking"),onTap: (){
-                      if(_isChecked){
-                        setState(()=> this._isChecked = false);
-                      }else{
-                        setState(()=> this._isChecked = true);
-                      }
-                    },)
-                  ],
-                ),
-                MaterialButton(
-                  color: AppColor.naviBlue,
-                  onPressed: (){
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Text("Status : "),
+                      Checkbox(value: _isChecked, onChanged: (value){
+                        setState(()=> this._isChecked = value!);
+                      }),
+                      InkWell(child: Text("Aviable For Booking"),onTap: (){
+                        if(_isChecked){
+                          setState(()=> this._isChecked = false);
+                        }else{
+                          setState(()=> this._isChecked = true);
+                        }
+                      },)
+                    ],
+                  ),
+                  MaterialButton(
+                    color: AppColor.naviBlue,
+                    onPressed: (){
 
-                  },child: Text("Save Change",style: TextStyle(color: Colors.white),),)
-              ],),
+                    },child: Text("Save Change",style: TextStyle(color: Colors.white),),)
+                ],),
+            ),
           ),
         ),
       ));

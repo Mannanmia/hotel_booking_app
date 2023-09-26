@@ -176,8 +176,7 @@ class _DashBoardViewState extends State<DashBoardView> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(
-                              response.date!,
+                            Text(response.date!,
                               style:  const TextStyle(
                                   color: AppColor.skyBlue, fontSize: AppValues.size_14),
                             ),
