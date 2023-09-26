@@ -36,4 +36,34 @@ class ApiBookingHistory{
       }
     }
   }
+
+
+  Future<bool?> postActionStatuss(var context,int bookinId,String status)async{
+
+    ProgressDialog pd = ProgressDialog(context: context);
+    pd.show(max: 100, msg: 'Updating');
+    try{
+      var access_token = await SharedPrefUtil.getString("access_token");
+     // var htl_id = await SharedPrefUtil.getInt("htl_id");
+      final String urlData = "https://dev.htlbd.com/api/vendor/booking/hotel/status/$bookinId/$status?token="+"$access_token";
+      var url = Uri.parse(urlData);
+      var response = await http.get(url);
+      var jsonData = jsonDecode(response.body);
+      if(response.statusCode == 200){
+        pd.close();
+        return true;
+      }
+    }catch (e) {
+      if (e is SocketException) {
+        pd.close();
+        ToastUtil.showShortToast("Cheack Network Connection");
+      } else if (e is TimeoutException) {
+        pd.close();
+        ToastUtil.showShortToast("Request Time Out");
+      } else {
+        pd.close();
+        ToastUtil.showShortToast(e.toString());
+      }
+    }
+  }
 }

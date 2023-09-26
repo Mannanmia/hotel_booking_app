@@ -154,7 +154,6 @@ class _MyProfileState extends State<MyProfile> {
     var data =await ApiProfileData().getProfile();
     setState(() {
       res = data! as GetProfileResponse;
-
       emailController.text = res!.data!.email!;
       firstName.text = res!.data!.firstName!;
       lastName.text = res!.data!.lastName!;

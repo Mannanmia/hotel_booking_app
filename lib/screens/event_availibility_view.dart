@@ -126,7 +126,7 @@ class _EventAvailibilityViewState extends State<EventAvailibilityView> {
       builder: (context) => StatefulBuilder(
         builder:(context,setState)=> AlertDialog(
           content: SizedBox(
-            height: size.height*0.45,
+            height: size.height*0.49,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -137,7 +137,7 @@ class _EventAvailibilityViewState extends State<EventAvailibilityView> {
                   children: [
                     Text("Start Date :"),
                     SizedBox(
-                      width: size.width*0.45,
+                      width: size.width*0.40,
                       child: TextField(
                         onTap: () async{
                           DateTime? datePicker = await showDatePicker(context: context,
@@ -161,7 +161,7 @@ class _EventAvailibilityViewState extends State<EventAvailibilityView> {
                   children: [
                     Text("End Date :"),
                     SizedBox(
-                      width: size.width*0.45,
+                      width: size.width*0.40,
                       child: TextField(
                         onTap: () async{
                           DateTime? datePicker = await showDatePicker(context: context,
@@ -185,7 +185,7 @@ class _EventAvailibilityViewState extends State<EventAvailibilityView> {
                   children: [
                     Text("Max Guest :"),
                     SizedBox(
-                      width: size.width*0.45,
+                      width: size.width*0.40,
                       child: TextField(
                         controller: _maxGuest,
                         decoration: InputDecoration(
@@ -202,7 +202,7 @@ class _EventAvailibilityViewState extends State<EventAvailibilityView> {
                   children: [
                     Text("Price :"),
                     SizedBox(
-                      width: size.width*0.45,
+                      width: size.width*0.40,
                       child: TextField(
                         controller: _price,
                         decoration: InputDecoration(
@@ -219,7 +219,9 @@ class _EventAvailibilityViewState extends State<EventAvailibilityView> {
                     Checkbox(value: _isChecked, onChanged: (value){
                       setState(()=> this._isChecked = value!);
                     }),
-                    InkWell(child: Text("Aviable For Booking"),onTap: (){
+                    InkWell(
+                      child: Text("Aviable Booking"),
+                      onTap: (){
                       if(_isChecked){
                         setState(()=> this._isChecked = false);
                       }else{
@@ -252,4 +254,6 @@ class _EventAvailibilityViewState extends State<EventAvailibilityView> {
       avaiLivilityLists = availableList!;
     });
   }
+
+
 }

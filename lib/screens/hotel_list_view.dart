@@ -22,7 +22,7 @@ class _HotelListViewState extends State<HotelListView> {
 
   void initState() {
     Future.delayed(Duration.zero,(){
-      callApiTourList();
+      callApiHotelList();
     });
     super.initState();
   }
@@ -115,7 +115,7 @@ class _HotelListViewState extends State<HotelListView> {
     );
   }
 
-  void callApiTourList() async{
+  void callApiHotelList() async{
     var data = await TotalHoteltList().get_ApiHotelList(context);
     setState(() {
       _hotls = data!;

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:hoel_booking_app/Core/Network/Api/profile_response.dart';
+import 'package:hoel_booking_app/Model/profile_response.dart';
 import 'package:hoel_booking_app/screens/room_availability.dart';
 import 'package:hoel_booking_app/screens/booking_history.dart';
 import 'package:hoel_booking_app/screens/career_List_view.dart';
@@ -34,6 +36,13 @@ class MoreView extends StatefulWidget {
 }
 
 class _MoreViewState extends State<MoreView> {
+  GetProfileResponse? res;
+
+  @override
+  void initState() {
+    getProfileData();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -54,38 +63,45 @@ class _MoreViewState extends State<MoreView> {
             children: [
               Container(
                 color: Colors.white70,
-                child: Column(
+                child: Row(
                   children: [
                     Container(
                       height: size.height * .2,
-                      width: size.width * 1,
-                      child: CircleAvatar(
-                        backgroundImage: AssetImage("images/launcher_icon.png"),
+                      width: size.width *0.4,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: CircleAvatar(
+                          child: (res?.data?.avatarUrl == null)? Image.asset("images/launcher_icon.png"):
+                          Image.network(res!.data!.avatarUrl!,),
+                        ),
                       ),
                     ),
-                    SizedBox(
-                      height: size.height * .01,
-                    ),
-                    Text(
-                      "Vendor",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 25,
-                      ),
-                    ),
-                    SizedBox(
-                      height: size.height * .01,
-                    ),
-                    Text(
-                      "MD.Monir Hossain",
-                      style: TextStyle(color: Colors.white, fontSize: 20),
-                    ),
-                    SizedBox(
-                      height: size.height * .01,
-                    ),
-                    Text(
-                      "Member science Oct 2021",
-                      style: TextStyle(color: Colors.white, fontSize: 16),
+                    SizedBox(width: 10,),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Vendor",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 25,
+                          ),
+                        ),
+                        SizedBox(
+                          height: size.height * .01,
+                        ),
+                        Text(
+                          res?.data?.name ?? "",
+                          style: TextStyle(color: Colors.white, fontSize: 20),
+                        ),
+                        SizedBox(
+                          height: size.height * .01,
+                        ),
+                        Text(
+                          "Member science Oct 2021",
+                          style: TextStyle(color: Colors.white, fontSize: 16),
+                        ),
+                      ],
                     ),
                   ],
                 ),
@@ -242,6 +258,14 @@ class _MoreViewState extends State<MoreView> {
         ),
       ),
     );
+  }
+
+
+  void getProfileData() async{
+    var data =await ApiProfileData().getProfile();
+    setState(() {
+      res = data! as GetProfileResponse;
+    });
   }
 
   Widget BuiltCard(String titel, Size size, String data1, String data2,

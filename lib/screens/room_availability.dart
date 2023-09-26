@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:hoel_booking_app/Core/Network/Api/ApiHotelList.dart';
+import 'package:hoel_booking_app/Model/ApiResponseHotelList.dart';
 import 'package:hoel_booking_app/utils/AppColors.dart';
 import 'package:intl/intl.dart';
 import 'package:hoel_booking_app/utils/alertDialouge.dart';
@@ -16,6 +18,17 @@ class _Available_BookedViewState extends State<Available_BookedView> {
   TextEditingController _maxGuest = TextEditingController();
   TextEditingController _price = TextEditingController();
   bool _isChecked = false;
+  int _isSelected=99999;
+  List<HotelResponse> _hotls =[] ;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    Future.delayed(Duration.zero,(){
+      callApiHotelList();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -28,48 +41,83 @@ class _Available_BookedViewState extends State<Available_BookedView> {
             }, icon: Icon(Icons.filter_list)),
           ],
         ),
-        body: GridView.builder(
-            itemCount: 30,
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 4) , itemBuilder: (context,index){
-          return  GestureDetector(
-            onTap: (){
-              openActionDialouge(context,size);
-            },
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                decoration: BoxDecoration(
-                    border: Border.all(
-                      color: Colors.black,
-                    ),
-                    borderRadius: BorderRadius.circular(4),
-                    color: Colors.white),
-                child: FittedBox(
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          DateFormat('yyyy-MM-dd').format(DateTime.now().add(Duration(days: index))),
-                          style: TextStyle(color: Colors.blue),
-                        ),
-                        SizedBox(
-                          height: size.height*.01,
-                        ),
-                        Text(
-                          "Block",
-                          style: TextStyle(color: Colors.blue),
-                        )
-                      ],
-                    ),
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              SizedBox(
+                height: size.height*0.37,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: _hotls.length,
+                    itemBuilder: (context,index){
+                      return InkWell(
+                          onTap: (){
+                          //  callApiAvailability(_tours[index].id!);
+                          },
+                          child: Text(_hotls[index].title!,style: TextStyle(fontSize: 30,color: _isSelected ==index?Colors.green:AppColor.yaleBlue),));
+                    },
                   ),
                 ),
               ),
-            ),
-          );
-        })
+              const SizedBox(height: 10,),
+              SizedBox(
+                height: size.height *0.5,
+                child: GridView.builder(
+                    itemCount: 30,
+                    shrinkWrap: true,
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 4) , itemBuilder: (context,index){
+                  return  GestureDetector(
+                    onTap: (){
+                      openActionDialouge(context, size);
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                        decoration: BoxDecoration(
+                            border: Border.all(
+                              color: Colors.black,
+                            ),
+                            borderRadius:  BorderRadius.circular(4),
+                            color: Colors.white),
+                        child: FittedBox(
+                          child: Padding(
+                            padding: const EdgeInsets.all(12.0),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  DateFormat('yyyy-MM-dd').format(DateTime.now().add(Duration(days: index))),
+                                  style: TextStyle(color: Colors.blue),
+                                ),
+                                SizedBox(
+                                  height: size.height*.01,
+                                ),
+                                Text(
+                                "Not Found",
+                                  style: TextStyle(color: Colors.blue),
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  );
+                }),
+              ),
+            ],
+          ),
+        )
     );
+  }
+
+  void callApiHotelList() async{
+    var data = await TotalHoteltList().get_ApiHotelList(context);
+    setState(() {
+      _hotls = data!;
+    });
   }
 
  Future openActionDialouge(BuildContext context,Size size) => showDialog(
